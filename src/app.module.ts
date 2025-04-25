@@ -3,14 +3,17 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(`${process.env.MONGODB_URI}`)
-
+    MongooseModule.forRoot(`${process.env.MONGODB_URI}`, {
+      dbName: `${process.env.DB_NAME}`,
+    }),
+    UsersModule
   ],
   controllers: [AppController],
   providers: [AppService],
