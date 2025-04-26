@@ -22,7 +22,7 @@ export class Worker extends User {
   credit: number;
 
   @Prop({
-    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Work' }],
+    type: [{ type: MongooseSchema.Types.ObjectId, ref: 'Job' }],
     default: [],
   })
   previousWorks: MongooseSchema.Types.ObjectId[];
