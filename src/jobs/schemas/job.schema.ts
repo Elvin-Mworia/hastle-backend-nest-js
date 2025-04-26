@@ -82,6 +82,13 @@ export class Job {
     default: JobStatus.OPEN,
   })
   status: string;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'Worker',
+    default: null,
+  })
+  workerAwarded: MongooseSchema.Types.ObjectId;
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);
