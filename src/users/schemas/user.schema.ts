@@ -48,4 +48,29 @@ export class User {
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
+// Add index for email lookups
+UserSchema.index({ email: 1 }, { unique: true });
 
+// Add pre-save hook for password hashing
+import * as bcrypt from 'bcrypt';
+
+UserSchema.pre('save', async function(next) {
+  const user = this;
+  
+  // Only hash the password if it's modified (or new)
+  if (!user.isModified('password')) return next();
+  
+  try {
+    // Generate a salt with 10 rounds
+    const salt = await bcrypt.genSalt(10);
+    
+    // Hash the password with the salt
+    const hash = await bcrypt.hash(user.password, salt);
+    
+    // Replace the plaintext password with the hash
+    user.password = hash;
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
