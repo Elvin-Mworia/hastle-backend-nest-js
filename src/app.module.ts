@@ -65,10 +65,10 @@ import { WorkersModule } from './workers/workers.module';
       }),
     },
     // Uncomment to enable global authentication
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: JwtAuthGuard,
-    // },
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
   ],
 })
 export class AppModule {}
