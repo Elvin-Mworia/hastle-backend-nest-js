@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
@@ -45,17 +46,21 @@ export class User {
   password: string;
 
   @Prop({ 
-    required: true,
     enum: [UserCategory.EMPLOYER, UserCategory.WORKER],
     default: UserCategory.WORKER,
   })
   userCategory: string;
+
+  @Prop({ 
+    default: 0,
+  })
+  tokenAmount: number;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
 
 // Add index for email lookups
-UserSchema.index({ email: 1 }, { unique: true });
+// UserSchema.index({ email: 1 }, { unique: true });
 
 // Add pre-save hook for password hashing
 import * as bcrypt from 'bcrypt';
