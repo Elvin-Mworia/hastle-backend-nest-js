@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -63,12 +64,13 @@ import { WorkersModule } from './workers/workers.module';
           enableImplicitConversion: true, // Enable type conversion
         },
       }),
-    },
-    // Uncomment to enable global authentication
+    },    
+    //global authentication
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
+
   ],
 })
 export class AppModule {}
