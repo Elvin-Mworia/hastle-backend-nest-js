@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { 
   Controller, 
   Get, 
@@ -14,13 +15,15 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema';
+import { Public } from 'src/auth/public';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
-
-  @Post()
+  @Public()
+  @Post('register')
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
+    console.log("/users/create");
     try {
       // Check if email already exists
       const emailExists = await this.usersService.emailExists(createUserDto.email);
