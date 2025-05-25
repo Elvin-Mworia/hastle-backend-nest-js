@@ -23,7 +23,13 @@ export class User {
     required: true,
     trim: true,
   })
-  username: string;
+  firstName: string;
+  
+  @Prop({ 
+    required: true,
+    trim: true,
+  })
+  lastName: string;
 
   @Prop({ 
     required: true, 

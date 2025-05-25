@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, CanActivate, ExecutionContext, ForbiddenException } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { ROLES_KEY } from '../decorators/roles.decorator';
@@ -6,8 +7,8 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 
 @Injectable()
 export class RolesGuard extends JwtAuthGuard implements CanActivate {
-  constructor(private reflector: Reflector) {
-    super();
+  constructor(reflector: Reflector) {
+    super(reflector);
   }
 
   /**
@@ -23,7 +24,7 @@ export class RolesGuard extends JwtAuthGuard implements CanActivate {
     }
 
     // Get the required roles from the route handler metadata
-    const requiredRoles = this.reflector.getAllAndOverride<UserCategory[]>(ROLES_KEY, [
+    const requiredRoles = this['reflector'].getAllAndOverride<UserCategory[]>(ROLES_KEY, [
       context.getHandler(),
       context.getClass(),
     ]);

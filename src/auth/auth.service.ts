@@ -19,7 +19,7 @@ export class AuthService {
    * @param loginDto The login credentials
    * @returns An object containing the JWT token and user information
    */
-  async login(loginDto: LoginDto): Promise<{ access_token: string; user: { _id: string; email: string; username: string; userCategory: string } }> {
+  async login(loginDto: LoginDto): Promise<{ access_token: string; user: { _id: string; email: string; firstName: string; lastName:string; userCategory: string } }> {
     const { email, password } = loginDto;
     
     // Find user by email
@@ -42,7 +42,8 @@ export class AuthService {
       user: {
         _id: (user._id as Types.ObjectId).toString(),
         email: user.email,
-        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
         userCategory: user.userCategory,
       },
     };
